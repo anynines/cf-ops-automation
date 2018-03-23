@@ -1,8 +1,9 @@
 require 'rspec'
 require 'fileutils'
 
-require_relative '../../lib/template_processor'
-require_relative '../../lib/ci_deployment_overview'
+require_relative '../../../lib/template_processor'
+require_relative '../../../lib/ci_deployment_overview'
+require_relative '../../../lib/deployment_deployers_config'
 
 describe 'DeplsPipelineTemplateProcessing' do
   let(:root_deployment_name) { 'my-root-depls' }
@@ -33,6 +34,8 @@ describe 'DeplsPipelineTemplateProcessing' do
               version: 0.169.0
               errands:
                   import:
+          bosh-deployment:
+            active: true
           status: enabled
       bui:
           stemcells:
@@ -46,6 +49,8 @@ describe 'DeplsPipelineTemplateProcessing' do
               base_location: https://bosh.io/d/github.com/
               repository: cloudfoundry-community/haproxy-boshrelease
               version: 8.0.12
+          bosh-deployment:
+            active: true
           status: enabled
     YAML
     YAML.safe_load(deps_yaml)
